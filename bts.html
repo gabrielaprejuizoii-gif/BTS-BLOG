@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BTS: Music, Feelings & You</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3EEFA;--card:#FBF9FE;--ink:#35264d;--soft:#6e5e8a;--line:#D9CBF0;--a:#9B7FD1;--b:#B79DE3;--c:#CDB9EE;--d:#E2D6F6;--e:#F0C6DD;--hero:#E8DDF8;--herotxt:#35264d;--hd:#6b4aa8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f1830;--card:#2a2140;--ink:#f1eaff;--soft:#c5b5e3;--line:#44375f;--hero:#281f3d;--herotxt:#f1eaff;--hd:#cdb6ff}}
+:root[data-theme="dark"]{--bg:#1f1830;--card:#2a2140;--ink:#f1eaff;--soft:#c5b5e3;--line:#44375f;--hero:#281f3d;--herotxt:#f1eaff;--hd:#cdb6ff}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.65 Nunito,system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0 0 .5em;color:var(--hd)}
+h2{font-size:clamp(1.8rem,5vw,2.6rem)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--c);outline-offset:3px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--hero);display:flex;gap:.25rem;overflow-x:auto;padding:.6rem 1rem}
+nav a{color:var(--herotxt);text-decoration:none;font-weight:800;font-size:.95rem;padding:.4rem .8rem;border-radius:99px;white-space:nowrap}
+nav a:hover{background:rgba(155,127,209,.25)}
+header{background:linear-gradient(180deg,var(--hero),var(--bg));color:var(--herotxt);padding:3.5rem 1.2rem 4rem;text-align:center}
+.beads{display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem;margin:0 auto 1.6rem;max-width:760px}
+.bead{width:clamp(34px,8vw,54px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font:800 clamp(1rem,3.5vw,1.6rem) Fraunces,serif;color:#35264d;box-shadow:inset 0 -4px 0 rgba(0,0,0,.15);animation:pop .5s backwards}
+.sp{width:14px;background:none;box-shadow:none}
+@keyframes pop{from{transform:scale(0) rotate(-40deg)}}
+header h1{font-size:clamp(2rem,6vw,3.4rem);margin-bottom:.3em}
+header p{max-width:36ch;margin:0 auto 1.4rem;font-size:1.25rem;color:var(--soft)}
+.btn{display:inline-block;background:var(--b);color:#27163f;font-weight:800;border:0;border-radius:99px;padding:.75rem 1.6rem;font-size:1.05rem;text-decoration:none;cursor:pointer;font-family:inherit}
+.btn:hover{filter:brightness(1.08)}
+.btn.alt{background:var(--a);color:#fff}
+main{max-width:980px;margin:0 auto;padding:0 1.2rem}
+section{padding:3.5rem 0 1rem}
+.lead{color:var(--soft);max-width:60ch}
+.read{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:1.6rem;display:grid;gap:1.5rem}
+@media(min-width:800px){.read{grid-template-columns:1.5fr 1fr}}
+.read p{margin:0 0 .9rem;max-width:62ch}
+.vw{color:inherit;text-decoration:none;font-weight:800;background:linear-gradient(transparent 52%,rgba(155,127,209,.45) 52%);border-bottom:2px dotted var(--a);border-radius:3px;padding:0 2px;cursor:pointer}.vw:hover{background:rgba(155,127,209,.6)}
+.side{background:color-mix(in srgb,var(--a) 14%,var(--card));border-radius:16px;padding:1.1rem}
+.side h3{font-size:1.2rem}
+.side ul{margin:0;padding-left:1.2rem}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.fact{background:var(--card);border:2px solid var(--line);border-top:8px solid var(--k);border-radius:18px;padding:1.1rem 1.2rem}
+.fact b{display:block;font:800 1.5rem Fraunces,serif;margin-bottom:.2rem}
+.era{border-radius:18px;padding:1.1rem;background:var(--k);color:#35264d;min-height:130px}.era h3,.era small{color:#35264d}
+.era h3{font-size:1.25rem;margin-bottom:.1rem}
+.era small{font-weight:800;opacity:.75}
+.era p{margin:.5rem 0 0;font-size:1rem;line-height:1.4}
+.flip{perspective:800px;background:none;border:0;padding:0;height:190px;cursor:pointer;font:inherit;color:inherit;text-align:center}
+.flip>span{display:block;position:relative;height:100%;transform-style:preserve-3d;transition:transform .5s}
+.flip.on>span{transform:rotateY(180deg)}
+.flip i{position:absolute;inset:0;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:18px;padding:.8rem;font-style:normal;border:2px solid var(--line);background:var(--card)}
+.flip i:first-child{font:800 1.5rem Fraunces,serif;border-bottom:8px solid var(--k)}
+.flip i:first-child em{font:400 2rem system-ui}
+.flip i:last-child{transform:rotateY(180deg);background:var(--k);color:#35264d;font-size:1rem;line-height:1.4;border-color:transparent}
+.q{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:1.1rem 1.3rem;margin-bottom:.9rem}
+.q p{font:800 1.25rem Fraunces,serif;margin:0 0 .5rem}
+.q .starts{color:var(--soft);font:400 .98rem Nunito,sans-serif;margin:0}
+.q .tag{display:inline-block;font:800 .72rem Nunito,sans-serif;letter-spacing:.06em;text-transform:uppercase;background:var(--d);color:#35264d;border-radius:99px;padding:.1rem .6rem;margin-bottom:.4rem}
+.q textarea,.opin input,.opin select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:.6rem .8rem;margin-top:.5rem}
+.quiz{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:1.5rem}
+.quiz h3{font-size:1.4rem}
+.opts{display:grid;gap:.6rem;margin:1rem 0}
+.opts button{font:inherit;font-weight:600;text-align:left;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:.7rem 1rem;cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--a)}
+.opts .ok{background:#DDEFE0;border-color:#8CBF98;color:#2f4a36}.opts .no{background:#F9D3DD;border-color:#C9829B;color:#5a2f40}.opts .feel{background:#E9DDFB;border-color:#9B7FD1;color:#35264d}
+.msg{min-height:1.6em;font-weight:800}
+.prog{height:10px;border-radius:9px;background:var(--line);overflow:hidden;margin-bottom:1rem}
+.prog div{height:100%;width:0;background:linear-gradient(90deg,var(--a),var(--b));transition:width .4s}
+.opin{background:var(--hero);color:var(--ink);border:2px solid var(--line);border-radius:22px;padding:1.6rem}
+.opin label{display:block;margin-top:.9rem;font-weight:800}
+.opin input,.opin select{background:var(--card);color:var(--ink);border-color:var(--line)}
+.result{margin-top:1.2rem;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:1rem;font:600 1.3rem Fraunces,serif;min-height:3.2em}
+details{background:var(--card);border:2px dashed var(--line);border-radius:16px;padding:1rem 1.3rem;margin-top:1rem}
+summary{font-weight:800;cursor:pointer}
+footer{margin-top:4rem;border-top:2px solid var(--line);background:var(--hero);color:var(--soft);text-align:center;padding:2rem 1rem;font-size:.95rem}
+footer button{margin-top:.8rem}
+@media print{nav,.btn,footer button{display:none}header{background:none;color:#000}}
+@media (prefers-reduced-motion:reduce){.bead{animation:none}html{scroll-behavior:auto}.flip>span,.prog div{transition:none}}
+</style>
+</head>
+<body>
+<nav aria-label="Main">
+<a href="#read">Read</a><a href="#facts">Fun Facts</a><a href="#music">Songs</a><a href="#words">Words</a><a href="#talk">Let's Talk</a><a href="#quiz">Quiz</a><a href="#opinion">My Opinion</a><a href="#teacher">Teacher</a>
+</nav>
+
+<header>
+<div class="beads" id="beads" aria-hidden="true"></div>
+<h1>BTS: Music, Feelings &amp; You</h1>
+<p>A purple fan magazine to read, learn new words and talk about music and feelings. 💜</p>
+<a class="btn" href="#read">Start reading</a>
+</header>
+
+<main>
+<section id="read">
+<h2>Meet BTS</h2>
+<p class="lead">Read the story. Tap the purple words to find them in the Word Bank.</p>
+<div class="read">
+<div>
+<p>BTS is a famous music group from South Korea. There are seven members: RM, Jin, SUGA, J-Hope, Jimin, V and Jungkook. They sing, rap and dance.</p>
+<p>Their lyrics are often emotional. They sing about friendship, love, stress and hope. Many songs are comforting when you feel sad or tired.</p>
+<p>Their choreography is powerful and full of energy. The members practice a lot. Teamwork is very important for them.</p>
+<p>BTS debuted on June 13, 2013. Now they have millions of fans around the world. The fans are called ARMY. BTS is grateful to ARMY, and ARMY is proud of BTS.</p>
+<p>Their message is simple: “Love yourself.” Their journey is inspiring.</p>
+</div>
+<aside class="side">
+<h3>Look and think</h3>
+<ul>
+<li>Who are the members?</li>
+<li>What do the lyrics talk about?</li>
+<li>How do you feel when you listen to BTS?</li>
+<li>Why is their message inspiring?</li>
+</ul>
+</aside>
+</div>
+</section>
+
+<section id="facts">
+<h2>Fun Facts</h2>
+<div class="grid">
+<div class="fact" style="--k:var(--a)"><b>7</b>There are seven members in BTS. Teamwork is their strength.</div>
+<div class="fact" style="--k:var(--b)"><b>13</b>BTS debuted on June 13, 2013. The group has a long journey.</div>
+<div class="fact" style="--k:var(--e)"><b>Borahae</b>V said this word first. It means “I purple you”, or “I love you”. Purple is the color of ARMY.</div>
+<div class="fact" style="--k:var(--c)"><b>ARMY</b>It means “Adorable Representative M.C. for Youth”. The fans are very proud!</div>
+<div class="fact" style="--k:var(--d)"><b>Dynamite</b>In 2020, BTS had a famous song all in English. It has a happy, fun melody.</div>
+</div>
+</section>
+
+<section id="music">
+<h2>Songs, Moment by Moment</h2>
+<p class="lead">Here are some famous BTS songs. Which one do you know?</p>
+<div class="grid">
+<div class="era" style="--k:#EDE4FA"><small>2013</small><h3>No More Dream</h3><p>Their first song. A strong, energetic debut.</p></div>
+<div class="era" style="--k:#E2D6F6"><small>2017</small><h3>Spring Day</h3><p>A comforting song about missing a friend.</p></div>
+<div class="era" style="--k:#F0C6DD"><small>2019</small><h3>Boy With Luv</h3><p>A bright, happy song about love.</p></div>
+<div class="era" style="--k:#CDB9EE"><small>2020</small><h3>Dynamite</h3><p>A fun song in English. It makes you want to dance.</p></div>
+<div class="era" style="--k:#E9D3E3"><small>2020</small><h3>Life Goes On</h3><p>A calm, emotional song about hope.</p></div>
+<div class="era" style="--k:#B79DE3"><small>2021</small><h3>Butter</h3><p>A smooth, cool song with a great melody.</p></div>
+<div class="era" style="--k:#F3E6F8"><small>2021</small><h3>Permission to Dance</h3><p>A happy song about dancing and joy.</p></div>
+<div class="era" style="--k:#DCCFF3"><small>2022</small><h3>Yet to Come</h3><p>A hopeful song about the future.</p></div>
+</div>
+</section>
+
+<section id="words">
+<h2>Word Bank</h2>
+<p class="lead">These are the purple words from the reading. Tap a card to turn it. Read the sentence out loud.</p>
+<div class="grid" id="wordgrid"></div>
+</section>
+
+<section id="talk">
+<h2>Let's Talk</h2>
+<p class="lead">Answer in full sentences. Use the hint to start. Then say your answers to your teacher.</p>
+<div id="qs"></div>
+</section>
+
+<section id="quiz">
+<h2>Reading &amp; Feelings Quiz</h2>
+<p class="lead">Some questions have a right answer. Some are about <b>you</b> and have no wrong answer.</p>
+<div class="quiz">
+<div class="prog"><div id="bar"></div></div>
+<h3 id="qt"></h3>
+<div class="opts" id="opts"></div>
+<p class="msg" id="msg" aria-live="polite"></p>
+<button class="btn alt" id="next" hidden>Next question</button>
+</div>
+</section>
+
+<section id="opinion">
+<h2>My Opinion</h2>
+<div class="opin">
+<p style="margin:0">Make your own sentences. Then say them to your teacher.</p>
+<label for="o1">My favorite BTS song is…</label>
+<input id="o1" placeholder="Write a song name">
+<label for="o2">I like it because it is…</label>
+<select id="o2"><option>emotional</option><option>powerful</option><option>comforting</option><option>inspiring</option><option>beautiful</option><option>fun</option></select>
+<label for="o3">When I listen to it, I feel…</label>
+<select id="o3"><option>happy</option><option>calm</option><option>proud</option><option>hopeful</option><option>excited</option><option>motivated</option><option>emotional</option></select>
+<label for="o4">I think BTS is…</label>
+<select id="o4"><option>talented</option><option>creative</option><option>inspiring</option><option>hardworking</option></select>
+<div class="result" id="res" aria-live="polite"></div>
+</div>
+</section>
+
+<section id="teacher">
+<h2>Teacher's Corner</h2>
+<details><summary>How to use this page (A1–A2 level)</summary>
+<p>1. Read aloud together. Ask the student to find and click the purple words. 2. Flip the Word Bank cards and ask for a new sentence with each word. 3. Use “Let's Talk” for speaking. Each card has a tag (<i>Wh- question, Would, Do you, Feelings</i>). Ask follow-ups: <i>Why? When? How did you feel?</i> 4. Finish with the quiz and the opinion sentences.</p>
+</details>
+<details><summary>Grammar and feelings focus</summary>
+<p>Wh- questions: <i>Where, Who, What, Why, When, How</i>. Conditional: <i>Would you like…? I would feel… / I wouldn't…</i>. Feelings: <i>happy, sad, excited, nervous, calm, proud, grateful, hopeful, motivated, emotional</i>. Practice: <i>I feel… when… / It makes me feel…</i></p>
+</details>
+<details><summary>Extra speaking ideas</summary>
+<p>Choose a song and describe how it makes you feel. Compare a happy song and a sad song. Ask your teacher: “What music makes you feel calm?” Practise third person: <i>He sings… She feels… They dance…</i></p>
+</details>
+</section>
+</main>
+
+<footer>
+<div>A fan-made English learning blog. Not official. All text is original and simple for learners.</div>
+<button class="btn" id="theme">Light / Dark mode</button>
+</footer>
+
+<script>
+const cols=['#E2D6F6','#CDB9EE','#F0C6DD','#B79DE3','#E9D3E3'];
+const bd=document.getElementById('beads');let n=0;
+'BTS ARMY'.split('').forEach(ch=>{const s=document.createElement('span');
+if(ch===' '){s.className='bead sp'}else{s.className='bead';s.textContent=ch;s.style.background=cols[n%5];s.style.animationDelay=(n*60)+'ms';n++}bd.appendChild(s)});
+
+const words=[['famous','known by many people','BTS is a famous group.'],
+['member','a person in a group','Jimin is a member of BTS.'],
+['lyrics','the words of a song','I read the lyrics of the song.'],
+['message','the main idea someone wants to share','Their message is “Love yourself.”'],
+['teamwork','working together as a group','Teamwork is very important.'],
+['friendship','a close and happy relationship','This song is about friendship.'],
+['choreography','the dance steps in a performance','Their choreography is powerful.'],
+['emotional','showing strong feelings','This song is very emotional.'],
+['powerful','very strong','Their performance is powerful.'],
+['inspiring','making people feel motivated','Her story is inspiring.'],
+['comforting','making you feel calm and safe','This song is comforting.'],
+['grateful','happy and thankful for something','I am grateful for my friends.'],
+['proud','happy about something good','ARMY is proud of BTS.'],
+['journey','a long experience or path in life','Their career is an amazing journey.']];
+const kc=['var(--a)','var(--b)','var(--c)','var(--d)','var(--e)'];
+const wg=document.getElementById('wordgrid');
+words.forEach((w,i)=>{const b=document.createElement('button');b.className='flip';b.id='w-'+w[0];b.style.setProperty('--k',kc[i%5]);
+b.setAttribute('aria-label','Word card: '+w[0]);
+b.innerHTML='<span><i><em>💜</em>'+w[0].toUpperCase()+'</i><i><b>'+w[1]+'</b><br>“'+w[2]+'”</i></span>';
+b.onclick=()=>b.classList.toggle('on');wg.appendChild(b)});
+
+const dq=[['Wh- question','What do you feel when you listen to your favorite song?','When I listen to my favorite song, I feel…'],
+['Wh- question','Why do you think BTS is famous around the world?','I think BTS is famous because…'],
+['Would','Would you like to go to a BTS concert?','Yes, I would. I would feel… / No, I wouldn\'t because…'],
+['Feelings','How do you feel when you are sad? Which song is comforting for you?','When I am sad, I feel… I listen to…'],
+['Wh- question','Who is your favorite member? Why?','My favorite member is… because he is…'],
+['Would','How would you feel if you met your favorite singer?','I would feel… because…'],
+['Feelings','What makes you proud?','I feel proud when…'],
+['Wh- question','When do you listen to music? Where do you listen to it?','I listen to music when… I listen in/at the…'],
+['Would','Would you like to learn a Korean song? Why or why not?','Yes, I would. / No, I wouldn\'t. I think it is…'],
+['Feelings','What are you grateful for today?','Today I am grateful for…'],
+['Do you…?','Do you dance when you hear a fun song?','Yes, I do. / No, I don\'t. I…']];
+const qs=document.getElementById('qs');
+dq.forEach(q=>{const d=document.createElement('div');d.className='q';
+d.innerHTML='<span class="tag">'+q[0]+'</span><p>'+q[1]+'</p><p class="starts">Start like this: '+q[2]+'</p><textarea rows="2" aria-label="Your answer" placeholder="Write your answer here…"></textarea>';qs.appendChild(d)});
+
+// [question, options, correct index (-1 = about you, no wrong answer), feedback]
+const quiz=[
+['Where is BTS from?',['South Korea','Japan','Brazil'],0],
+['How many members are in BTS?',['Seven','Five','Ten'],0],
+['How do you feel when you listen to a happy song?',['Happy and full of energy','Calm and relaxed','Excited. I want to dance!'],-1,'💜 Great! Music can change our feelings.'],
+['When did BTS debut?',['In 2013','In 2000','In 2020'],0],
+['What are BTS fans called?',['ARMY','Swifties','Stars'],0],
+['Would you like to go to a BTS concert?',['Yes, I would. I would be so excited!','Yes, I would, but I would be nervous.','No, I wouldn\'t. I prefer music at home.'],-1,'💜 Nice answer! Now say it to your teacher.'],
+['What does “teamwork” mean?',['working together as a group','working alone','working very late'],0],
+['What does “borahae” mean?',['“I purple you” (I love you)','Good morning','Thank you'],0],
+['Why do many people find BTS songs comforting?',['The lyrics talk about hope and friendship','The songs are very long','The songs have no music'],0],
+['How would you feel if you met your favorite singer?',['Nervous','Happy and emotional','Proud and grateful'],-1,'💜 Me too! It would be a big moment.'],
+['Which song is all in English?',['Dynamite','Spring Day','Fake Love'],0],
+['An inspiring message makes people feel…',['motivated','bored','sleepy'],0]];
+const total=quiz.filter(q=>q[2]>=0).length;
+let qi=0,score=0;
+const $=id=>document.getElementById(id);
+function show(){const q=quiz[qi];$('qt').textContent=(qi+1)+'. '+q[0];$('msg').textContent='';$('next').hidden=true;
+$('bar').style.width=(qi/quiz.length*100)+'%';const o=$('opts');o.innerHTML='';
+q[1].forEach((t,i)=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>{
+[...o.children].forEach(x=>x.disabled=true);
+if(q[2]<0){b.classList.add('feel');$('msg').textContent=q[3]}
+else{o.children[q[2]].classList.add('ok');
+if(i===q[2]){score++;$('msg').textContent='✅ Correct! Great job!'}else{b.classList.add('no');$('msg').textContent='❌ Not this time. The green answer is correct.'}}
+$('next').hidden=false;$('next').textContent=qi===quiz.length-1?'See my score':'Next question'};o.appendChild(b)})}
+$('next').onclick=()=>{qi++;if(qi<quiz.length){show()}else{$('bar').style.width='100%';
+$('qt').textContent='You scored '+score+' out of '+total+'!';
+$('opts').innerHTML='';$('msg').textContent=score>=7?'🌟 Amazing! You are a real ARMY!':'💪 Good try! Read the story again and play again.';
+$('next').textContent='Play again';$('next').onclick=()=>location.reload()}};
+show();
+
+function sent(){const s=$('o1').value.trim()||'…';
+$('res').textContent='My favorite BTS song is “'+s+'”. I like it because it is '+$('o2').value+'. When I listen to it, I feel '+$('o3').value+'. I think BTS is '+$('o4').value+'.'}
+['o1','o2','o3','o4'].forEach(i=>$(i).addEventListener('input',sent));sent();
+
+$('theme').onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dark?'light':'dark'};
+const re=new RegExp('\\b('+words.map(w=>w[0]).join('|')+')(s)?\\b','gi');
+document.querySelectorAll('.read p,.side li,.fact,.era p,.q>p:not(.starts)').forEach(el=>{el.innerHTML=el.innerHTML.replace(re,(m,w)=>'<a href="#words" class="vw" data-w="'+w.toLowerCase()+'">'+m+'</a>')});
+document.addEventListener('click',e=>{const a=e.target.closest('.vw');if(!a)return;e.preventDefault();const c=document.getElementById('w-'+a.dataset.w);if(!c)return;c.scrollIntoView({behavior:'smooth',block:'center'});c.classList.add('on');c.animate([{transform:'scale(1.07)'},{transform:'scale(1)'}],{duration:500})});
+</script>
+</body>
+</html>
